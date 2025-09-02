@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression Test Suite" parallel="tests" thread-count="2">
+    <test name="Sample Test1">
+        <parameter name="deviceName" value="iPhone 16"/>
+        <parameter name="platformVersion" value="18.6"/>
+        <parameter name="port" value="4723"/>
+        <classes>
+            <class name="sampleTests.Sample"/>
+        </classes>
+    </test>
+
+    <test name="Sample Test2">
+        <parameter name="deviceName" value="iPad Pro 11-inch (M4)"/>
+        <parameter name="platformVersion" value="17.5"/>
+        <parameter name="port" value="4724"/>
+        <classes>
+            <class name="sampleTests.Sample"/>
+        </classes>
+    </test>
+</suite>
