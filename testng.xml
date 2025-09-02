@@ -6,16 +6,16 @@
         <parameter name="platformVersion" value="18.6"/>
         <parameter name="port" value="4723"/>
         <classes>
-            <class name="sampleTests.Sample"/>
+            <class name="sampleTests.SampleTests"/>
         </classes>
     </test>
 
-    <test name="Sample Test2">
+    <!--test name="Sample Test2">
         <parameter name="deviceName" value="iPad Pro 11-inch (M4)"/>
         <parameter name="platformVersion" value="17.5"/>
         <parameter name="port" value="4724"/>
         <classes>
-            <class name="sampleTests.Sample"/>
+            <class name="sampleTests.SampleTests"/>
         </classes>
-    </test>
+    </test-->
 </suite>

@@ -9,13 +9,13 @@ public class DriverFactoryCapabilities {
     /*Non Editable Capabilities*/
     public static String appName = "Gospel Stream";
     public static String platformName = "iOS";
-    public static String automationName = "xcuitest";
+    public static String automationName = "XCUITest";
     public static String enableMultiWindows = "enableMultiWindows";
     public static String appPath = System.getProperty("user.dir")+"/app/"+appName+".app";
 
 
     /*Editable Capabilities*/
-    public static boolean isHeadless = true;
+    public static boolean isHeadless = false;
 
 
 }
