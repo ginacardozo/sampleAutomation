@@ -5,7 +5,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import pageObjects.Home;
 
 public class SampleTests {
     @BeforeClass
@@ -17,8 +16,6 @@ public class SampleTests {
     @Test
     public void sampleTest (){
         System.out.println("LOADING GOSPEL STREAM");
-        Home home = new Home(DriverFactory.getDriver());
-        home.waitForHomeScreenToBeFullyLoaded();
     }
 
     @AfterClass

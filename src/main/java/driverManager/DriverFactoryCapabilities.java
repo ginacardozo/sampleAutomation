@@ -7,11 +7,11 @@ public class DriverFactoryCapabilities {
     public static String url = "http://"+ipAddress+":";
 
     /*Non Editable Capabilities*/
-    public static String appName = "Gospel Stream";
-    public static String platformName = "iOS";
-    public static String automationName = "XCUITest";
+    public static String appName = "app-alpha";
+    public static String platformName = "Android";
+    public static String automationName = "UIAutomator2";
     public static String enableMultiWindows = "enableMultiWindows";
-    public static String appPath = System.getProperty("user.dir")+"/app/"+appName+".app";
+    public static String appPath = System.getProperty("user.dir")+"/app/"+appName+".apk";
 
 
     /*Editable Capabilities*/
