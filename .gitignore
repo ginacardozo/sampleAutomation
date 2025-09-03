@@ -39,3 +39,4 @@ build/
 
 ### Other files ###
 /app/*.app
+/app/*.apk
