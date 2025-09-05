@@ -2,8 +2,8 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Regression Test Suite" parallel="tests" thread-count="2">
     <test name="Sample Test1">
-        <parameter name="deviceName" value="Gina's S24 Ultra"/>
-        <parameter name="platformVersion" value="15.0"/>
+        <parameter name="deviceName" value="Pixel8"/>
+        <parameter name="platformVersion" value="16.0"/>
         <parameter name="port" value="4723"/>
         <classes>
             <class name="sampleTests.SampleTests"/>
