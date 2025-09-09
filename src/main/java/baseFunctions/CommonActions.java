@@ -3,18 +3,12 @@ package baseFunctions;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Wait;
 
-import java.time.Duration;
-import java.util.NoSuchElementException;
 import java.util.logging.Logger;
 
-public class CommonActions {
+public class CommonActions implements Waits, Assertions {
     protected IOSDriver driver;
     private static final Logger logger= Logger.getLogger(CommonActions.class.getName());
 
@@ -23,42 +17,29 @@ public class CommonActions {
     protected WebElement allowNotifications;
     @AndroidFindBy(xpath = "//*[contains(@resource-id, \"deny_button\")]")
     protected WebElement denyNotifications;
+    @AndroidFindBy(xpath = "//*[@text = \"Close\"]")
+    protected WebElement closeNewListenSection;
+
+    /*Radio Elements*/
+    @AndroidFindBy(xpath = "//*[@text = \"24/7 Radio\"]")
+    protected WebElement openMiniRadio;
+    @AndroidFindBy(xpath = "//*[@content-desc = \"Close\"]/ancestor::android.view.View[2]")
+    protected WebElement openRadioPlayer;
+    @AndroidFindBy(xpath = "//*[@content-desc = \"Minimize Player\"]")
+    protected WebElement minimizePlayer;
+    @AndroidFindBy(xpath = "//*[@content-desc = \"Pause\"]")
+    protected WebElement pausePlayer;
+    @AndroidFindBy(xpath = "//*[@content-desc = \"Close\"]")
+    protected WebElement closePlayer;
 
 
     /*Constructor*/
     public CommonActions (IOSDriver driver){
         this.driver=driver;
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
-
     }
 
     /*Common Actions Screen Functions*/
-
-    public void waitUntilNotVisible (IOSDriver driver, WebElement element){
-        Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
-                .withTimeout(Duration.ofSeconds(300))
-                .pollingEvery(Duration.ofMillis(500))
-                .ignoring(NoSuchElementException.class);
-        wait.until(ExpectedConditions.invisibilityOf(element));
-    }
-
-    public void waitUntilVisible (IOSDriver driver, WebElement element){
-        Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
-                .withTimeout(Duration.ofSeconds(30))
-                .pollingEvery(Duration.ofMillis(500))
-                .ignoring(NoSuchElementException.class);
-        wait.until(ExpectedConditions.visibilityOf(element));
-    }
-
-    public void waitUntilClickable (IOSDriver driver, WebElement element){
-        Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
-                .withTimeout(Duration.ofSeconds(30))
-                .pollingEvery(Duration.ofMillis(500))
-                .ignoring(NoSuchElementException.class);
-        wait.until(ExpectedConditions.elementToBeClickable(element));
-    }
-
-
     public void notificationsHandler (String buttonName) {
         if (buttonName.equalsIgnoreCase("allow")) {
             waitUntilClickable(driver, allowNotifications);
@@ -68,6 +49,40 @@ public class CommonActions {
             denyNotifications.click();
         }
         System.out.println("\tSelected: " + buttonName);
+    }
+
+    public void newLiveSectionHandler (String buttonName) {
+        waitUntilClickable(driver, closeNewListenSection);
+        closeNewListenSection.click();
+
+        System.out.println("\tSelected: " + buttonName);
+    }
+
+
+    public void validateMiniPlayerElements (){
+        assertElementIsVisible(pausePlayer);
+        assertElementIsVisible(closePlayer);
+    }
+
+    public void radioOpener (String radioName) {
+        waitUntilClickable(driver, openMiniRadio);
+        openMiniRadio.click();
+
+        System.out.println("\tSelected: " + radioName);
+    }
+
+    public void openRadioPlayer (String miniRadio) {
+        waitUntilClickable(driver, openRadioPlayer);
+        openRadioPlayer.click();
+
+        System.out.println("\tSelected: " + miniRadio);
+    }
+
+    public void minimizeRadioPlayer (String radioPlayer) {
+        waitUntilClickable(driver, minimizePlayer);
+        minimizePlayer.click();
+
+        System.out.println("\tSelected: " + radioPlayer);
     }
 
 }

@@ -20,7 +20,12 @@ public class SampleTests {
         Home home = new Home(DriverFactory.getDriver());
 
         home.notificationsHandler("Allow");
+        home.newLiveSectionHandler("Close");
         home.waitForHomeScreenToBeFullyLoaded();
+        home.radioOpener("24/7 Radio");
+        home.validateMiniPlayerElements();
+        home.openRadioPlayer("//*[@content-desc = \"Close\"]/ancestor::android.view.View[2]");
+        home.minimizeRadioPlayer("Minimize Player");
     }
 
     @AfterClass
