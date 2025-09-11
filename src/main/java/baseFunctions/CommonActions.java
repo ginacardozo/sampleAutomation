@@ -20,18 +20,6 @@ public class CommonActions implements Waits, Assertions {
     @AndroidFindBy(xpath = "//*[@text = \"Close\"]")
     protected WebElement closeNewListenSection;
 
-    /*Radio Elements*/
-    @AndroidFindBy(xpath = "//*[@text = \"24/7 Radio\"]")
-    protected WebElement openMiniRadio;
-    @AndroidFindBy(xpath = "//*[@content-desc = \"Close\"]/ancestor::android.view.View[2]")
-    protected WebElement openRadioPlayer;
-    @AndroidFindBy(xpath = "//*[@content-desc = \"Minimize Player\"]")
-    protected WebElement minimizePlayer;
-    @AndroidFindBy(xpath = "//*[@content-desc = \"Pause\"]")
-    protected WebElement pausePlayer;
-    @AndroidFindBy(xpath = "//*[@content-desc = \"Close\"]")
-    protected WebElement closePlayer;
-
 
     /*Constructor*/
     public CommonActions (IOSDriver driver){
@@ -56,33 +44,6 @@ public class CommonActions implements Waits, Assertions {
         closeNewListenSection.click();
 
         System.out.println("\tSelected: " + buttonName);
-    }
-
-
-    public void validateMiniPlayerElements (){
-        assertElementIsVisible(pausePlayer);
-        assertElementIsVisible(closePlayer);
-    }
-
-    public void radioOpener (String radioName) {
-        waitUntilClickable(driver, openMiniRadio);
-        openMiniRadio.click();
-
-        System.out.println("\tSelected: " + radioName);
-    }
-
-    public void openRadioPlayer (String miniRadio) {
-        waitUntilClickable(driver, openRadioPlayer);
-        openRadioPlayer.click();
-
-        System.out.println("\tSelected: " + miniRadio);
-    }
-
-    public void minimizeRadioPlayer (String radioPlayer) {
-        waitUntilClickable(driver, minimizePlayer);
-        minimizePlayer.click();
-
-        System.out.println("\tSelected: " + radioPlayer);
     }
 
 }

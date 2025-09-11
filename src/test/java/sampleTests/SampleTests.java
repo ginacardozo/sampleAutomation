@@ -6,6 +6,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pageObjects.Home;
+import pageObjects.Radio;
 
 public class SampleTests {
     @BeforeClass
@@ -18,14 +19,15 @@ public class SampleTests {
     public void sampleTest (){
         System.out.println("LOADING GOSPEL STREAM");
         Home home = new Home(DriverFactory.getDriver());
+        Radio radio = new Radio(DriverFactory.getDriver());
 
         home.notificationsHandler("Allow");
         home.newLiveSectionHandler("Close");
         home.waitForHomeScreenToBeFullyLoaded();
-        home.radioOpener("24/7 Radio");
-        home.validateMiniPlayerElements();
-        home.openRadioPlayer("//*[@content-desc = \"Close\"]/ancestor::android.view.View[2]");
-        home.minimizeRadioPlayer("Minimize Player");
+        radio.radioOpener("24/7 Radio");
+        radio.validateMiniPlayerElements();
+        radio.openRadioPlayer("//*[@content-desc = \"Close\"]/ancestor::android.view.View[2]");
+        radio.minimizeRadioPlayer("Minimize Player");
     }
 
     @AfterClass
