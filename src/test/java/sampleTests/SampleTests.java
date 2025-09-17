@@ -1,18 +1,9 @@
 package sampleTests;
 
-import objectManager.ObjectManager;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Parameters;
+import baseTest.BaseTest;
 import org.testng.annotations.Test;
 
-public class SampleTests extends ObjectManager {
-    @BeforeClass
-    @Parameters ({"deviceName","platformVersion","port"})
-    public void setUp (String deviceName, String platformVersion, String port){
-        System.out.println("\n@before hook - launching driver");
-        configureAppium(deviceName, platformVersion, port);
-    }
+public class SampleTests extends BaseTest {
     @Test
     public void sampleTest (){
         System.out.println("LOADING GOSPEL STREAM");
@@ -24,11 +15,5 @@ public class SampleTests extends ObjectManager {
         getRadioPage().validateMiniPlayerElements();
         getRadioPage().openRadioPlayer("//*[@content-desc = \"Close\"]/ancestor::android.view.View[2]");
         getRadioPage().minimizeRadioPlayer("Minimize Player");
-    }
-
-    @AfterClass
-    public void tearDown (){
-        System.out.println("\n@after hook - quit driver");
-        cleanUpDriver();
     }
 }
