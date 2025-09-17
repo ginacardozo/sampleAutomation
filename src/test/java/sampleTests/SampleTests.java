@@ -1,38 +1,34 @@
 package sampleTests;
 
-import driverManager.DriverFactory;
+import objectManager.ObjectManager;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import pageObjects.Home;
-import pageObjects.Radio;
 
-public class SampleTests {
+public class SampleTests extends ObjectManager {
     @BeforeClass
     @Parameters ({"deviceName","platformVersion","port"})
     public void setUp (String deviceName, String platformVersion, String port){
         System.out.println("\n@before hook - launching driver");
-        DriverFactory.configureAppium(deviceName, platformVersion, port);
+        configureAppium(deviceName, platformVersion, port);
     }
     @Test
     public void sampleTest (){
         System.out.println("LOADING GOSPEL STREAM");
-        Home home = new Home(DriverFactory.getDriver());
-        Radio radio = new Radio(DriverFactory.getDriver());
+        getHomePage().notificationsHandler("Allow");
+        getHomePage().newLiveSectionHandler("Close");
+        getHomePage().waitForHomeScreenToBeFullyLoaded();
 
-        home.notificationsHandler("Allow");
-        home.newLiveSectionHandler("Close");
-        home.waitForHomeScreenToBeFullyLoaded();
-        radio.radioOpener("24/7 Radio");
-        radio.validateMiniPlayerElements();
-        radio.openRadioPlayer("//*[@content-desc = \"Close\"]/ancestor::android.view.View[2]");
-        radio.minimizeRadioPlayer("Minimize Player");
+        getRadioPage().radioOpener("24/7 Radio");
+        getRadioPage().validateMiniPlayerElements();
+        getRadioPage().openRadioPlayer("//*[@content-desc = \"Close\"]/ancestor::android.view.View[2]");
+        getRadioPage().minimizeRadioPlayer("Minimize Player");
     }
 
     @AfterClass
     public void tearDown (){
         System.out.println("\n@after hook - quit driver");
-        DriverFactory.cleanUpDriver();
+        cleanUpDriver();
     }
 }
