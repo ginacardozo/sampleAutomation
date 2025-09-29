@@ -11,9 +11,14 @@ public class SampleTests extends BaseTest {
         getHomePage().newLiveSectionHandler("Close");
         getHomePage().waitForHomeScreenToBeFullyLoaded();
 
-        getRadioPage().radioOpener("24/7 Radio");
+        getRadioPage().radioOpener();
         getRadioPage().validateMiniPlayerElements();
-        getRadioPage().openRadioPlayer("//*[@content-desc = \"Close\"]/ancestor::android.view.View[2]");
-        getRadioPage().minimizeRadioPlayer("Minimize Player");
+        getRadioPage().openRadioPlayer();
+        getRadioPage().minimizeRadioPlayer();
+        getRadioPage().closeRadioPlayer();
+
+        System.out.println("SWIPING SCREEN");
+
+        getHomePage().swipeToHomeSection("Music");
     }
 }

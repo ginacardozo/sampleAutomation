@@ -29,25 +29,28 @@ public class Radio extends CommonActions {
         assertElementIsVisible(closePlayer);
     }
 
-    public void radioOpener (String radioName) {
+    public void radioOpener () {
         waitUntilClickable(driver, openMiniRadio);
+        System.out.println("\tSelected: " + openMiniRadio.getText());
         openMiniRadio.click();
-
-        System.out.println("\tSelected: " + radioName);
     }
 
-    public void openRadioPlayer (String miniRadio) {
+    public void openRadioPlayer () {
         waitUntilClickable(driver, openRadioPlayer);
+        System.out.println("\tSelected: " + openRadioPlayer.getText());
         openRadioPlayer.click();
-
-        System.out.println("\tSelected: " + miniRadio);
     }
 
-    public void minimizeRadioPlayer (String radioPlayer) {
+    public void minimizeRadioPlayer () {
         waitUntilClickable(driver, minimizePlayer);
+        System.out.println("\tSelected: " + minimizePlayer.getText());
         minimizePlayer.click();
+    }
 
-        System.out.println("\tSelected: " + radioPlayer);
+    public void closeRadioPlayer () {
+        waitUntilClickable(driver, closePlayer);
+        System.out.println("\tSelected: " + closePlayer.getText());
+        closePlayer.click();
     }
 
 }
