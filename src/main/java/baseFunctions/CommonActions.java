@@ -82,17 +82,7 @@ public class CommonActions implements Waits, Assertions {
                     xf = (int)(dims.height * 0.9);
             default -> throw new IllegalArgumentException("swipeScreen(): dir: '" + dir + "' NOT supported");
         }
-
-        PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-        Sequence swipe = new Sequence(finger, 1);
-
-        swipe.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), xi, yi));
-        swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
-        swipe.addAction(finger.createPointerMove(Duration.ofMillis(400), PointerInput.Origin.viewport(), xf, yf));
-        swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-        swipe.addAction(new Pause(finger, Duration.ofMillis(1000)));
-
-        driver.perform(java.util.Collections.singletonList(swipe));
+        dragAndDrop(xi, yi, xf, yf, 1,1);
     }
 
     /*Swipe To Find An Element*/
@@ -113,16 +103,43 @@ public class CommonActions implements Waits, Assertions {
             System.out.println("Section displayed: " + sectionText);
             if (sectionText.equalsIgnoreCase(sectionName)) {
                 System.out.println("Section: " + sectionName + " found");
+                swipeScreen("UP");
                 break;
             }
             if (section == sections.getLast()) {
                 swipeScreen("UP");
                 sections = getListOfElements(sectionXpath);
                 iterator = sections.listIterator();
-            }
-            if (sectionText.equalsIgnoreCase(sections.getLast().getText())) {
-                Assert.fail("Element with text: " + sectionName + " not found after several swipes");
+                if (sectionText.equalsIgnoreCase(sections.getLast().getText())) {
+                    Assert.fail("Element with text: " + sectionName + " not found after several swipes");
+                }
             }
         }
+    }
+
+    /*Drag and Drop on screen Method*/
+    public void dragAndDrop(int xi, int yi, int xf, int yf, int duration, int pauseTime) {
+
+        PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+        Sequence dragAndDrop = new Sequence(finger, 1);
+
+        dragAndDrop.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), xi, yi));
+        dragAndDrop.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+        dragAndDrop.addAction(finger.createPointerMove(Duration.ofSeconds(duration), PointerInput.Origin.viewport(), xf, yf));
+        dragAndDrop.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+        dragAndDrop.addAction(new Pause(finger, Duration.ofSeconds(pauseTime)));
+
+
+        driver.perform(java.util.Collections.singletonList(dragAndDrop));
+    }
+
+    public void swipeOverScrollElement(String sectionName){
+        String sectionXpath = "//android.widget.TextView[@content-desc = \"View All "+sectionName+"\"]/following-sibling::android.view.View[1]";
+        WebElement section = driver.findElement(AppiumBy.xpath(sectionXpath));
+        int xi, xf, y;
+        y = section.getLocation().getY()+(section.getSize().getHeight()/2);
+        xi = section.getLocation().getX()+(int)(section.getSize().getWidth()*0.9);
+        xf = section.getLocation().getX()+(int)(section.getSize().getWidth()*0.1);
+        dragAndDrop(xi, y, xf, y, 2,0);
     }
 }

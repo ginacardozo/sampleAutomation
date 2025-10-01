@@ -19,6 +19,7 @@ public class SampleTests extends BaseTest {
 
         System.out.println("SWIPING SCREEN");
 
-        getHomePage().swipeToHomeSection("Music");
+        getHomePage().swipeToHomeSection("Music Videos");
+        getHomePage().swipeOverScrollElement("Music Videos");
     }
 }
