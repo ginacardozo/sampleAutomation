@@ -103,7 +103,17 @@ public class CommonActions implements Waits, Assertions {
             System.out.println("Section displayed: " + sectionText);
             if (sectionText.equalsIgnoreCase(sectionName)) {
                 System.out.println("Section: " + sectionName + " found");
-                swipeScreen("UP");
+                //swipeScreen("UP");/*aqui se puede ajustar la posicion del elemento (centrarlo antes de hacer el drag and drop en x)*/
+                // Center the found element on the screen
+                int elementY = section.getLocation().getY() + (section.getSize().getHeight() / 2);
+                int screenHeight = driver.manage().window().getSize().height;
+                int screenCenterY = screenHeight / 2;
+                int swipeDistance = elementY - screenCenterY;
+
+                if (swipeDistance != 0) {
+                    dragAndDrop(screenHeight / 2, elementY,screenHeight / 2, screenCenterY,1, 1);//mejorar la duracion del drag and drop
+                    System.out.println("Section " + sectionName + " centered on the screen.");
+                }
                 break;
             }
             if (section == sections.getLast()) {
@@ -129,7 +139,6 @@ public class CommonActions implements Waits, Assertions {
         dragAndDrop.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
         dragAndDrop.addAction(new Pause(finger, Duration.ofSeconds(pauseTime)));
 
-
         driver.perform(java.util.Collections.singletonList(dragAndDrop));
     }
 
@@ -142,4 +151,21 @@ public class CommonActions implements Waits, Assertions {
         xf = section.getLocation().getX()+(int)(section.getSize().getWidth()*0.1);
         dragAndDrop(xi, y, xf, y, 2,0);
     }
+
+    /*Double Tap on screen Method*/
+    public void doubleTap(int xi, int yi) {
+        PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+        Sequence doubleTap = new Sequence(finger, 1);
+
+        doubleTap.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), xi, yi));
+        doubleTap.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+        doubleTap.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+        doubleTap.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+        doubleTap.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+
+        driver.perform(java.util.Collections.singletonList(doubleTap));
+    }
+
+    /*Aqui:Abrir un video de forma automatizada y ejecutar el double tap, para asegurarte que el double tap funciono comparas ambas pantallas del video en mini y los comparas si son de distinto tamanao ahi acaba */
+    /*usar todas las funciones necesarias separadas*/
 }
