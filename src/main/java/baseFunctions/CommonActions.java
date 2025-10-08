@@ -159,13 +159,13 @@ public class CommonActions implements Waits, Assertions {
 
         doubleTap.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), xi, yi));
         doubleTap.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+        doubleTap.addAction(new Pause(finger, Duration.ofMillis(100)));
         doubleTap.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+        doubleTap.addAction(new Pause(finger, Duration.ofMillis(100)));
         doubleTap.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+        doubleTap.addAction(new Pause(finger, Duration.ofMillis(100)));
         doubleTap.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
 
         driver.perform(java.util.Collections.singletonList(doubleTap));
     }
-
-    /*Aqui:Abrir un video de forma automatizada y ejecutar el double tap, para asegurarte que el double tap funciono comparas ambas pantallas del video en mini y los comparas si son de distinto tamanao ahi acaba */
-    /*usar todas las funciones necesarias separadas*/
 }

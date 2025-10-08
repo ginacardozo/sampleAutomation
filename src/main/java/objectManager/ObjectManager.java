@@ -7,6 +7,7 @@ public class ObjectManager extends DriverFactory {
 
     private Home home;
     private Radio radio;
+    private VideoCollections videoCollections;
 
     public Home getHomePage() {
         if (home == null) {
@@ -20,5 +21,12 @@ public class ObjectManager extends DriverFactory {
             radio = new Radio(getDriver());
         }
         return radio;
+    }
+
+    public VideoCollections getVideoCollectionsPage() {
+        if (videoCollections == null) {
+            videoCollections = new VideoCollections(getDriver());
+        }
+        return videoCollections;
     }
 }

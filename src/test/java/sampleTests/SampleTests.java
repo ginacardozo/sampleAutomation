@@ -20,6 +20,13 @@ public class SampleTests extends BaseTest {
         System.out.println("SWIPING SCREEN");
 
         getHomePage().swipeToHomeSection("Music Videos");
-        getHomePage().swipeOverScrollElement("Music Videos");
+        //getHomePage().swipeOverScrollElement("Music Videos");
+        getVideoCollectionsPage().videoOpener();
+        getVideoCollectionsPage().playVideo();
+        getVideoCollectionsPage().verifyVideoPlayerIsFullyLoaded();
+        getVideoCollectionsPage().minimizeVideoPlayer();
+        getVideoCollectionsPage().validateMiniVideoElements();
+        getVideoCollectionsPage().compareHoverVideoPlayerSizes();
+
     }
 }

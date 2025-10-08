@@ -34,4 +34,12 @@ public interface Waits {
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
+    default void waitUntilAttributeValueToBe (IOSDriver driver, WebElement element, String value){
+        Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+                .withTimeout(Duration.ofSeconds(60))
+                .pollingEvery(Duration.ofMillis(500))
+                .ignoring(NoSuchElementException.class);
+        wait.until(ExpectedConditions.attributeToBe(element, "content-desc", value));
+    }
+
 }
