@@ -1,9 +1,8 @@
 package baseTest;
 
+import driverManager.DriverFactoryCapabilities;
 import objectManager.ObjectManager;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 
 public class BaseTest extends ObjectManager {
     @BeforeClass
@@ -17,5 +16,21 @@ public class BaseTest extends ObjectManager {
     public void tearDown (){
         System.out.println("\n@after hook - quit driver");
         cleanUpDriver();
+    }
+
+    @BeforeMethod
+    public void popUpTest (){
+        System.out.println("LOADING GOSPEL STREAM");
+        getHomePage().notificationsHandler("Allow");
+        getHomePage().newLiveSectionHandler("Close");
+        getHomePage().waitForHomeScreenToBeFullyLoaded();
+    }
+
+    @AfterMethod
+    public void clearTest() {
+        getDriver().terminateApp("org.lds.stream.alpha");
+        getDriver().removeApp("org.lds.stream.alpha");
+        getDriver().installApp(DriverFactoryCapabilities.appPath);
+        getDriver().activateApp("org.lds.stream.alpha");
     }
 }

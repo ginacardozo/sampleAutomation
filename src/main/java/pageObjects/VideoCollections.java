@@ -21,6 +21,9 @@ public class VideoCollections extends CommonActions {
     @AndroidFindBy(xpath = "//*[contains(@resource-id,\"exo_progress\")]")
     protected WebElement playingTime;
 
+    @AndroidFindBy(xpath = "//*[@content-desc = \"Close\"]")
+    protected WebElement closeVideo;
+
 
     public VideoCollections(IOSDriver driver) {
         super(driver);
@@ -70,5 +73,6 @@ public class VideoCollections extends CommonActions {
             hoverSizeTwo = firstMinimizedVideo.getSize();
         }
         System.out.println("The minimized video is smaller than the double tapped video.");
+        closeVideo.click();
     }
 }
