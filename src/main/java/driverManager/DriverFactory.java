@@ -20,7 +20,7 @@ public class DriverFactory {
     private static final Duration wdaTimeLaunchTimeOut = Duration.ofSeconds(60);
     private static final Logger logger = Logger.getLogger(DriverFactory.class.getName());
 
-    public static void configureAppium(String deviceName, String platformVersion, String port){
+    public static void configureAppium(String deviceName, String platformVersion, String port, String udid){
 
         int currentPort = Integer.parseInt(port);
         servicePort.set(currentPort);
@@ -37,6 +37,7 @@ public class DriverFactory {
             mobileCapabilities.setApp(appPath);
             mobileCapabilities.setCapability(enableMultiWindows, true);
             mobileCapabilities.setWdaLaunchTimeout(wdaTimeLaunchTimeOut);
+            mobileCapabilities.setUdid(udid);
             mobileCapabilities.setCapability("isHeadless", isHeadless);
 
             mobileCapabilities.setWdaLocalPort(8100+(currentPort-4723));

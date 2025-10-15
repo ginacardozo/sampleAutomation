@@ -5,7 +5,14 @@
         <parameter name="deviceName" value="Pixel8"/>
         <parameter name="platformVersion" value="16.0"/>
         <parameter name="port" value="4723"/>
+        <parameter name="udid" value="emulator-5554"/>
         <classes>
+            <class name="sampleTests.HomeTests">
+                <methods>
+                    <include name="radioPlayer"/>
+                    <include name="videoPlayer"/>
+                </methods>
+            </class>
             <class name="sampleTests.SampleTests">
                 <methods>
                     <include name="sampleTest2"/>
@@ -15,12 +22,26 @@
         </classes>
     </test>
 
-    <!--test name="Sample Test2">
-        <parameter name="deviceName" value="iPad Pro 11-inch (M4)"/>
-        <parameter name="platformVersion" value="17.5"/>
+    <test name="Sample Test2">
+        <parameter name="deviceName" value="Pixel Tablet"/>
+        <parameter name="platformVersion" value="16.0"/>
         <parameter name="port" value="4724"/>
+        <parameter name="udid" value="emulator-5556"/>
         <classes>
-            <class name="sampleTests.SampleTests"/>
+            <class name="sampleTests.HomeTests">
+                <methods>
+                    <include name="radioPlayer"/>
+                    <include name="videoPlayer"/>
+                </methods>
+            </class>
+            <class name="sampleTests.SampleTests">
+                <methods>
+                    <include name="sampleTest2"/>
+                    <include name="sampleTest3"/>
+                </methods>
+            </class>
         </classes>
-    </test-->
+    </test>
+
+
 </suite>

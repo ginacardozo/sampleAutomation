@@ -5,14 +5,14 @@ import objectManager.ObjectManager;
 import org.testng.annotations.*;
 
 public class BaseTest extends ObjectManager {
-    @BeforeClass
-    @Parameters({"deviceName","platformVersion","port"})
-    public void setUp (String deviceName, String platformVersion, String port){
+    @BeforeTest
+    @Parameters({"deviceName","platformVersion","port", "udid"})
+    public void setUp (String deviceName, String platformVersion, String port, String udid){
         System.out.println("\n@before hook - launching driver");
-        configureAppium(deviceName, platformVersion, port);
+        configureAppium(deviceName, platformVersion, port, udid);
     }
 
-    @AfterClass
+    @AfterTest
     public void tearDown (){
         System.out.println("\n@after hook - quit driver");
         cleanUpDriver();
