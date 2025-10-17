@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 public class VideoCollections extends CommonActions {
 
     /*Video Elements*/
-    @AndroidFindBy(xpath = "//*[@text = \"Far Away\"]")
+    @AndroidFindBy(xpath = "//*[@text = \"Messy Room Meltdown\"]")
     protected WebElement openVideo;
     @AndroidFindBy(xpath = "//*[@content-desc = \"Play video\"]")
     protected WebElement playVideo;
@@ -73,6 +73,7 @@ public class VideoCollections extends CommonActions {
             hoverSizeTwo = firstMinimizedVideo.getSize();
         }
         System.out.println("The minimized video is smaller than the double tapped video.");
+        firstMinimizedVideo.click();
         closeVideo.click();
     }
 }

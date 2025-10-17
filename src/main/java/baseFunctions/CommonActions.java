@@ -40,13 +40,19 @@ public class CommonActions implements Waits, Assertions {
 
     /*Common Actions Screen Functions*/
     public void notificationsHandler (String buttonName) {
+        waitUntilVisible(driver, allowNotifications);
+        waitUntilVisible(driver, denyNotifications);
+        WebElement buttonToClick;
+
         if (buttonName.equalsIgnoreCase("allow")) {
-            waitUntilClickable(driver, allowNotifications);
-            allowNotifications.click();
+            buttonToClick = allowNotifications;
         } else {
-            waitUntilClickable(driver, denyNotifications);
-            denyNotifications.click();
+            buttonToClick = denyNotifications;
         }
+
+        waitUntilClickable(driver, buttonToClick);
+        buttonToClick.click();
+
         System.out.println("\tSelected: " + buttonName);
     }
 
@@ -91,7 +97,7 @@ public class CommonActions implements Waits, Assertions {
     }
 
     public void swipeToHomeSection (String sectionName){
-        String sectionXpath = "//android.view.View/preceding-sibling::android.widget.TextView[not(contains(@text,\"View All\"))][not(@text = \"All Videos\")][not(@text = \"Downloads\")][not(@text = \"Favorites\")][not(@text = \"Clips\")]";
+        String sectionXpath = "//*[@text = \"View All\"]/preceding-sibling::android.widget.TextView";
         List<WebElement> sections = getListOfElements(sectionXpath);
         ListIterator<WebElement> iterator = sections.listIterator();
         WebElement section;
@@ -103,15 +109,19 @@ public class CommonActions implements Waits, Assertions {
             System.out.println("Section displayed: " + sectionText);
             if (sectionText.equalsIgnoreCase(sectionName)) {
                 System.out.println("Section: " + sectionName + " found");
-                //swipeScreen("UP");/*aqui se puede ajustar la posicion del elemento (centrarlo antes de hacer el drag and drop en x)*/
                 // Center the found element on the screen
-                int elementY = section.getLocation().getY() + (section.getSize().getHeight() / 2);
+                int elementY = section.getLocation().getY() + (section.getSize().getHeight());
+                int elementX = section.getLocation().getX() + (section.getSize().getWidth() / 2);
+
                 int screenHeight = driver.manage().window().getSize().height;
                 int screenCenterY = screenHeight / 2;
                 int swipeDistance = elementY - screenCenterY;
 
+                int initialSwipeY = (int)(screenHeight * 0.6);
+                int finalSwipeY = (int)(screenHeight * 0.4);
+
                 if (swipeDistance != 0) {
-                    dragAndDrop(screenHeight / 2, elementY,screenHeight / 2, screenCenterY,1, 1);//mejorar la duracion del drag and drop
+                    dragAndDrop(elementX, initialSwipeY, elementX, finalSwipeY,1, 1);
                     System.out.println("Section " + sectionName + " centered on the screen.");
                 }
                 break;

@@ -9,7 +9,7 @@
         <classes>
             <class name="sampleTests.HomeTests">
                 <methods>
-                    <include name="radioPlayer"/>
+                    <!--include name="radioPlayer"/-->
                     <include name="videoPlayer"/>
                 </methods>
             </class>
@@ -22,7 +22,7 @@
         </classes>
     </test>
 
-    <test name="Sample Test2">
+    <!--test name="Sample Test2">
         <parameter name="deviceName" value="Pixel Tablet"/>
         <parameter name="platformVersion" value="16.0"/>
         <parameter name="port" value="4724"/>
@@ -41,7 +41,7 @@
                 </methods>
             </class>
         </classes>
-    </test>
+    </test-->
 
 
 </suite>

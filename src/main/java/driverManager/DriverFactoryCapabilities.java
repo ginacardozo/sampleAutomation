@@ -16,6 +16,4 @@ public class DriverFactoryCapabilities {
 
     /*Editable Capabilities*/
     public static boolean isHeadless = false;
-
-
 }
