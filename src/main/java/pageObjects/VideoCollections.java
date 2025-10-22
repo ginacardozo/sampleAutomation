@@ -24,7 +24,7 @@ public class VideoCollections extends CommonActions {
     @AndroidFindBy(xpath = "//*[@content-desc = \"Close\"]")
     protected WebElement closeVideo;
 
-
+    /*Constructor*/
     public VideoCollections(IOSDriver driver) {
         super(driver);
     }
@@ -51,6 +51,7 @@ public class VideoCollections extends CommonActions {
         minimizeVideo.click();
         System.out.println("Video minimized");
     }
+
     public void validateMiniVideoElements() {
         assertElementIsVisible(firstMinimizedVideo);
         System.out.println("Minimized video found");

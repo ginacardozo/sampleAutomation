@@ -6,7 +6,6 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.WebElement;
 
 public class Home extends CommonActions {
-
     /*Home Screen Elements*/
     @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"Watch\"]")
     protected WebElement watchIcon;

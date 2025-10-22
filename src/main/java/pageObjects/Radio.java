@@ -6,7 +6,6 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.WebElement;
 
 public class Radio extends CommonActions {
-
     /*Radio Elements*/
     @AndroidFindBy(xpath = "//*[@text = \"24/7 Radio\"]")
     protected WebElement openMiniRadio;
@@ -19,10 +18,10 @@ public class Radio extends CommonActions {
     @AndroidFindBy(xpath = "//*[@content-desc = \"Close\"]")
     protected WebElement closePlayer;
 
+    /*Constructor*/
     public Radio(IOSDriver driver) {
         super(driver);
     }
-
 
     public void validateMiniPlayerElements (){
         assertElementIsVisible(pausePlayer);
@@ -52,5 +51,4 @@ public class Radio extends CommonActions {
         System.out.println("\tSelected: " + closePlayer.getText());
         closePlayer.click();
     }
-
 }

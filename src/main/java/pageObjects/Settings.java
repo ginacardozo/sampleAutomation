@@ -15,6 +15,7 @@ public class Settings extends CommonActions {
     @AndroidFindBy(xpath = "//*[@content-desc = \"Back\"]")
     protected WebElement backIconSettings;
 
+    /*Constructor*/
     public Settings(IOSDriver driver) {
         super(driver);
     }

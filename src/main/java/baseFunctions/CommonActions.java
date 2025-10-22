@@ -4,6 +4,7 @@ import io.appium.java_client.AppiumBy;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Pause;
@@ -31,7 +32,6 @@ public class CommonActions implements Waits, Assertions {
     @AndroidFindBy(xpath = "//*[@text = \"Close\"]")
     protected WebElement closeNewListenSection;
 
-
     /*Constructor*/
     public CommonActions (IOSDriver driver){
         this.driver=driver;
@@ -49,7 +49,6 @@ public class CommonActions implements Waits, Assertions {
         } else {
             buttonToClick = denyNotifications;
         }
-
         waitUntilClickable(driver, buttonToClick);
         buttonToClick.click();
 
@@ -65,7 +64,7 @@ public class CommonActions implements Waits, Assertions {
 
     /*Simple Swipe Method*/
     public void swipeScreen(String dir) {
-        System.out.println("swipeScreen(): dir: '" + dir + "'"); // always log your actions
+        System.out.println("swipeScreen(): dir: '" + dir + "'");
         int xi, xf, yi, yf;
 
         // init screen variables
@@ -96,7 +95,7 @@ public class CommonActions implements Waits, Assertions {
         return new CopyOnWriteArrayList<>(driver.findElements(AppiumBy.xpath(xpath)));
     }
 
-    public void swipeToHomeSection (String sectionName){
+    public void swipeToSection(String sectionName){
         String sectionXpath = "//*[@text = \"View All\"]/preceding-sibling::android.widget.TextView";
         List<WebElement> sections = getListOfElements(sectionXpath);
         ListIterator<WebElement> iterator = sections.listIterator();
@@ -117,8 +116,8 @@ public class CommonActions implements Waits, Assertions {
                 int screenCenterY = screenHeight / 2;
                 int swipeDistance = elementY - screenCenterY;
 
-                int initialSwipeY = (int)(screenHeight * 0.6);
-                int finalSwipeY = (int)(screenHeight * 0.4);
+                int initialSwipeY = (int)(screenHeight * 0.7);
+                int finalSwipeY = (int)(screenHeight * 0.3);
 
                 if (swipeDistance != 0) {
                     dragAndDrop(elementX, initialSwipeY, elementX, finalSwipeY,1, 1);
@@ -155,11 +154,11 @@ public class CommonActions implements Waits, Assertions {
     public void swipeOverScrollElement(String sectionName){
         String sectionXpath = "//android.widget.TextView[@content-desc = \"View All "+sectionName+"\"]/following-sibling::android.view.View[1]";
         WebElement section = driver.findElement(AppiumBy.xpath(sectionXpath));
-        int xi, xf, y;
-        y = section.getLocation().getY()+(section.getSize().getHeight()/2);
-        xi = section.getLocation().getX()+(int)(section.getSize().getWidth()*0.9);
-        xf = section.getLocation().getX()+(int)(section.getSize().getWidth()*0.1);
-        dragAndDrop(xi, y, xf, y, 2,0);
+
+        int y = section.getLocation().getY() + (section.getSize().getHeight() / 2);
+        int xi = section.getLocation().getX() + (int)(section.getSize().getWidth()*(0.9));
+        int xf = section.getLocation().getX() + (int)(section.getSize().getWidth()*(0.1));
+        dragAndDrop(xi, y, xf, y, 2, 0);
     }
 
     /*Double Tap on screen Method*/

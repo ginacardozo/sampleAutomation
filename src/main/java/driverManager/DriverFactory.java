@@ -8,7 +8,9 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+
 import java.time.Duration;
+
 import java.util.logging.Logger;
 
 import static driverManager.DriverFactoryCapabilities.*;
@@ -56,7 +58,6 @@ public class DriverFactory {
         } catch (MalformedURLException | URISyntaxException exception){
             throw new RuntimeException(exception);
         }
-
     }
 
 

@@ -1,7 +1,6 @@
 package sampleTests;
 
 import baseTest.BaseTest;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class SampleTests extends BaseTest {

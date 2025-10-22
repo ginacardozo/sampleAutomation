@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Regression Test Suite" parallel="tests" thread-count="2">
+    <!-- Here are the Listeners -->
+    <listeners>
+        <listener class-name="listeners.RetryListener"/>
+        <listener class-name="listeners.FailedTestListener"/>
+    </listeners>
+
     <test name="Sample Test1">
         <parameter name="deviceName" value="Pixel8"/>
         <parameter name="platformVersion" value="16.0"/>
@@ -22,6 +28,7 @@
         </classes>
     </test>
 
+    <!-- Below test is commented to run only one device at a time -->
     <!--test name="Sample Test2">
         <parameter name="deviceName" value="Pixel Tablet"/>
         <parameter name="platformVersion" value="16.0"/>
@@ -42,6 +49,4 @@
             </class>
         </classes>
     </test-->
-
-
 </suite>

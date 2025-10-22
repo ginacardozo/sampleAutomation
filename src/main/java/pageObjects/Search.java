@@ -6,7 +6,6 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.WebElement;
 
 public class Search extends CommonActions {
-
     /*Search Elements*/
     @AndroidFindBy(xpath = "//*[@content-desc = \"Search\"]")
     protected WebElement searchSectionIcon;
@@ -17,7 +16,7 @@ public class Search extends CommonActions {
     @AndroidFindBy(xpath = "//*[@content-desc = \"Back\"]")
     protected WebElement backIconSearch;
 
-
+    /*Constructor*/
     public Search (IOSDriver driver) {
         super(driver);
     }

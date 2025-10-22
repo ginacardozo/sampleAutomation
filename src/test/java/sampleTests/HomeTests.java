@@ -16,7 +16,7 @@ public class HomeTests extends BaseTest {
     @Test
     public void videoPlayer (){
         System.out.println("SWIPING SCREEN");
-        getHomePage().swipeToHomeSection("Just Added");
+        getHomePage().swipeToSection("Just Added");
         getHomePage().swipeOverScrollElement("Just Added");
         getVideoCollectionsPage().videoOpener();
         getVideoCollectionsPage().playVideo();
