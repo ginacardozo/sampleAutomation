@@ -5,7 +5,9 @@ import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Pause;
 import org.openqa.selenium.interactions.PointerInput;
@@ -13,6 +15,7 @@ import org.openqa.selenium.interactions.Sequence;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
+import java.io.File;
 import java.time.Duration;
 import java.util.List;
 import java.util.ListIterator;
@@ -176,5 +179,23 @@ public class CommonActions implements Waits, Assertions {
         doubleTap.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
 
         driver.perform(java.util.Collections.singletonList(doubleTap));
+    }
+
+    public void takeScreenshot(String fileName){
+        String deviceName = driver.getCapabilities().getCapability("deviceName").toString();
+        File screenshot = driver.getScreenshotAs(OutputType.FILE);
+        String filePath = System.getProperty("user.dir") + "/target/screenshots/" + deviceName + "/";
+        File destinationFile = new File(filePath);
+
+        if (!destinationFile.exists() && !destinationFile.mkdirs()) {
+            throw new RuntimeException("Failed to create directory: " + destinationFile.getAbsolutePath());
+        }
+
+        try {
+            FileUtils.copyFile(screenshot, new File(filePath + fileName + ".png"));
+            System.out.println("Screenshot saved to: " + fileName + ".png");
+        } catch (Exception e) {
+            logger.info("Failed to save screenshot: " + e.getMessage());
+        }
     }
 }

@@ -15,16 +15,16 @@
         <classes>
             <class name="sampleTests.HomeTests">
                 <methods>
-                    <!--include name="radioPlayer"/-->
-                    <include name="videoPlayer"/>
+                    <include name="radioPlayer"/>
+                    <!--include name="videoPlayer"/-->
                 </methods>
             </class>
-            <class name="sampleTests.SampleTests">
+            <!--class name="sampleTests.SampleTests">
                 <methods>
                     <include name="sampleTest2"/>
                     <include name="sampleTest3"/>
                 </methods>
-            </class>
+            </class-->
         </classes>
     </test>
 

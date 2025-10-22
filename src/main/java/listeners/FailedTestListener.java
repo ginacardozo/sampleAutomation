@@ -13,8 +13,9 @@ public class FailedTestListener implements ITestListener {
 
         try {
             ObjectManager objectManager = (ObjectManager) result.getInstance();
+            objectManager.getHomePage().takeScreenshot(className + "_" + testName + "_" + timestamp);
         } catch (Exception e) {
-            System.err.println("Failed");
+            System.err.println("Failed to take screenshot: " + e.getMessage());
         }
     }
 }

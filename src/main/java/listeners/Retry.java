@@ -9,7 +9,7 @@ import org.testng.ITestResult;
 
 public class Retry implements IRetryAnalyzer {
     private static final Logger log = LogManager.getLogger(Retry.class);
-    private static final int MAX_RETRY_COUNT = 3;
+    private static final int MAX_RETRY_COUNT = 2;
     private int retryCount = 0;
 
     @Override
