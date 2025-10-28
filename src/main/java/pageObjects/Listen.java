@@ -1,6 +1,7 @@
 package pageObjects;
 
 import baseFunctions.CommonActions;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.WebElement;
@@ -13,7 +14,7 @@ public class Listen extends CommonActions {
     protected WebElement podcastsLabel;
 
     /*Constructor*/
-    public Listen (IOSDriver driver) {
+    public Listen (AndroidDriver driver) {
         super(driver);
     }
 

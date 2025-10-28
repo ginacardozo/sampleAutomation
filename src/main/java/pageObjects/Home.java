@@ -1,6 +1,7 @@
 package pageObjects;
 
 import baseFunctions.CommonActions;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.WebElement;
@@ -11,7 +12,7 @@ public class Home extends CommonActions {
     protected WebElement watchIcon;
 
     /*Constructor*/
-    public Home (IOSDriver driver) {
+    public Home (AndroidDriver driver) {
         super (driver); /*usa el driver de common actions*/
     }
 

@@ -1,6 +1,7 @@
 package pageObjects;
 
 import baseFunctions.CommonActions;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.WebElement;
@@ -17,7 +18,7 @@ public class Search extends CommonActions {
     protected WebElement backIconSearch;
 
     /*Constructor*/
-    public Search (IOSDriver driver) {
+    public Search (AndroidDriver driver) {
         super(driver);
     }
 

@@ -1,6 +1,7 @@
 package pageObjects;
 
 import baseFunctions.CommonActions;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.WebElement;
@@ -16,7 +17,7 @@ public class Settings extends CommonActions {
     protected WebElement backIconSettings;
 
     /*Constructor*/
-    public Settings(IOSDriver driver) {
+    public Settings(AndroidDriver driver) {
         super(driver);
     }
 

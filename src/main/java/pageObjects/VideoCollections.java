@@ -1,7 +1,7 @@
 package pageObjects;
 
 import baseFunctions.CommonActions;
-import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
@@ -25,7 +25,7 @@ public class VideoCollections extends CommonActions {
     protected WebElement closeVideo;
 
     /*Constructor*/
-    public VideoCollections(IOSDriver driver) {
+    public VideoCollections(AndroidDriver driver) {
         super(driver);
     }
 

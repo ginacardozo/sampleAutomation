@@ -1,6 +1,7 @@
 package pageObjects;
 
 import baseFunctions.CommonActions;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.WebElement;
@@ -19,7 +20,7 @@ public class Radio extends CommonActions {
     protected WebElement closePlayer;
 
     /*Constructor*/
-    public Radio(IOSDriver driver) {
+    public Radio(AndroidDriver driver) {
         super(driver);
     }
 

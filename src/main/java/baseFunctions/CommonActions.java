@@ -1,7 +1,7 @@
 package baseFunctions;
 
 import io.appium.java_client.AppiumBy;
-import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 
@@ -24,43 +24,37 @@ import java.util.logging.Logger;
 
 
 public class CommonActions implements Waits, Assertions {
-    protected IOSDriver driver;
+    protected AndroidDriver driver;
     private static final Logger logger= Logger.getLogger(CommonActions.class.getName());
 
     /*Common Actions Screen Elements*/
     @AndroidFindBy(xpath = "//*[@text = \"Allow\"]")
-    protected WebElement allowNotifications;
+    protected WebElement allowButton;
     @AndroidFindBy(xpath = "//*[contains(@resource-id, \"deny_button\")]")
-    protected WebElement denyNotifications;
+    protected WebElement denyButton;
     @AndroidFindBy(xpath = "//*[@text = \"Close\"]")
-    protected WebElement closeNewListenSection;
+    protected WebElement closeButton;
 
     /*Constructor*/
-    public CommonActions (IOSDriver driver){
+    public CommonActions (AndroidDriver driver){
         this.driver=driver;
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
 
     /*Common Actions Screen Functions*/
-    public void notificationsHandler (String buttonName) {
-        waitUntilVisible(driver, allowNotifications);
-        waitUntilVisible(driver, denyNotifications);
-        WebElement buttonToClick;
+    public void popUpHandler(String popUpHeader, String buttonName) {
+        String popUpXpath = "//android.widget.TextView[@text=\""+popUpHeader+"\"]";
+        WebElement popUpElement = getElementByXpath(popUpXpath);
+        waitUntilVisible(driver, popUpElement);
 
-        if (buttonName.equalsIgnoreCase("allow")) {
-            buttonToClick = allowNotifications;
-        } else {
-            buttonToClick = denyNotifications;
+        WebElement buttonElement;
+        switch (buttonName.toUpperCase()) {
+            case "ALLOW" -> buttonElement = allowButton;
+            case "DENY" -> buttonElement = denyButton;
+            case "CLOSE" -> buttonElement = closeButton;
+            default -> throw new IllegalArgumentException("popUpHandler(): buttonName: '" + buttonName + "' NOT supported");
         }
-        waitUntilClickable(driver, buttonToClick);
-        buttonToClick.click();
-
-        System.out.println("\tSelected: " + buttonName);
-    }
-
-    public void newLiveSectionHandler (String buttonName) {
-        waitUntilClickable(driver, closeNewListenSection);
-        closeNewListenSection.click();
+        tapUntilClickable(buttonElement);
 
         System.out.println("\tSelected: " + buttonName);
     }
@@ -154,14 +148,29 @@ public class CommonActions implements Waits, Assertions {
         driver.perform(java.util.Collections.singletonList(dragAndDrop));
     }
 
-    public void swipeOverScrollElement(String sectionName){
-        String sectionXpath = "//android.widget.TextView[@content-desc = \"View All "+sectionName+"\"]/following-sibling::android.view.View[1]";
-        WebElement section = driver.findElement(AppiumBy.xpath(sectionXpath));
+    public void swipeOverScrollElement(String elementName){
+        String elementXpath = "//android.widget.TextView[@content-desc = \"View All "+ elementName +"\"]/following-sibling::android.view.View[1]";
+        WebElement section = driver.findElement(AppiumBy.xpath(elementXpath));
 
-        int y = section.getLocation().getY() + (section.getSize().getHeight() / 2);
+       int y = section.getLocation().getY() + (section.getSize().getHeight() / 2);
         int xi = section.getLocation().getX() + (int)(section.getSize().getWidth()*(0.9));
         int xf = section.getLocation().getX() + (int)(section.getSize().getWidth()*(0.1));
-        dragAndDrop(xi, y, xf, y, 2, 0);
+        dragAndDrop(xi, y, xf, y, 3, 0);
+
+        /*//Center the found element on the screen on X axis
+        int y = elementFound.getLocation().getY() + (elementFound.getSize().getHeight() / 2);
+        int x = elementFound.getLocation().getX() + (elementFound.getSize().getWidth());
+
+        int screenWidth = driver.manage().window().getSize().width;
+        int screenCenterX = screenWidth / 2;
+        int swipeDistance = x - screenCenterX;
+        int initialSwipeX = (int)(screenWidth * 0.9);
+        int finalSwipeX = (int)(screenWidth * 0.1);
+
+        if (swipeDistance != 0) {
+            dragAndDrop(initialSwipeX, y, finalSwipeX, y,2, 0);
+            System.out.println("Element " + elementName + " swiped.");
+        }*/
     }
 
     /*Double Tap on screen Method*/
@@ -197,5 +206,19 @@ public class CommonActions implements Waits, Assertions {
         } catch (Exception e) {
             logger.info("Failed to save screenshot: " + e.getMessage());
         }
+    }
+
+    public WebElement getElementByXpath (String xpath) {
+        return driver.findElement(AppiumBy.xpath(xpath));
+    }
+
+    public void tapUntilClickable (WebElement element) {
+        waitUntilClickable(driver, element);
+        element.click();
+    }
+
+    public void tapUntilVisible (WebElement element) {
+        waitUntilVisible(driver, element);
+        element.click();
     }
 }

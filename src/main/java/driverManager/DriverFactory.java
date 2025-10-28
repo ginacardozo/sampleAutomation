@@ -1,7 +1,8 @@
 package driverManager;
 
+import com.google.common.collect.ImmutableMap;
 import io.appium.java_client.Setting;
-import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.options.XCUITestOptions;
 
 import java.net.MalformedURLException;
@@ -11,12 +12,13 @@ import java.net.URL;
 
 import java.time.Duration;
 
+import java.util.Arrays;
 import java.util.logging.Logger;
 
 import static driverManager.DriverFactoryCapabilities.*;
 
 public class DriverFactory {
-    private static final ThreadLocal <IOSDriver> mobileDriver = new ThreadLocal<>();
+    private static final ThreadLocal <AndroidDriver> mobileDriver = new ThreadLocal<>();
     private static final ThreadLocal <Integer> servicePort = new ThreadLocal<>();
     private static final Duration implicitWait = Duration.ofSeconds(30);
     private static final Duration wdaTimeLaunchTimeOut = Duration.ofSeconds(60);
@@ -41,6 +43,7 @@ public class DriverFactory {
             mobileCapabilities.setWdaLaunchTimeout(wdaTimeLaunchTimeOut);
             mobileCapabilities.setUdid(udid);
             mobileCapabilities.setCapability("isHeadless", isHeadless);
+            mobileCapabilities.setCapability("autoGrantPermissions", autoGrantPermissions);
 
             mobileCapabilities.setWdaLocalPort(8100+(currentPort-4723));
             mobileCapabilities.setCapability("wda.connectionTimeout", 60000);
@@ -49,7 +52,7 @@ public class DriverFactory {
 
             URI uri = new URI(url+currentPort);
             URL fixedURL = uri.toURL();
-            IOSDriver driver = new IOSDriver(fixedURL, mobileCapabilities);
+            AndroidDriver driver = new AndroidDriver(fixedURL, mobileCapabilities);
 
             driver.manage().timeouts().implicitlyWait(implicitWait);
             driver.setSetting(Setting.WAIT_FOR_IDLE_TIMEOUT, 60);
@@ -61,7 +64,7 @@ public class DriverFactory {
     }
 
 
-    public static IOSDriver getDriver () {
+    public static AndroidDriver getDriver () {
         return mobileDriver.get();
     }
 
@@ -74,5 +77,12 @@ public class DriverFactory {
             AppiumServiceManager.stopAppiumService();
             servicePort.remove();
         }
+    }
+
+    public void grantPermission(AndroidDriver driver, String permission) {
+        driver.executeScript("mobile: shell", ImmutableMap.of(
+                "command", "pm grant",
+                "args", Arrays.asList("com.example.app", permission)
+        ));
     }
 }

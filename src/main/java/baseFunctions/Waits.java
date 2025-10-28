@@ -1,5 +1,6 @@
 package baseFunctions;
 
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 
 import org.openqa.selenium.WebDriver;
@@ -12,7 +13,7 @@ import java.time.Duration;
 import java.util.NoSuchElementException;
 
 public interface Waits {
-    default void waitUntilNotVisible (IOSDriver driver, WebElement element){
+    default void waitUntilNotVisible (AndroidDriver driver, WebElement element){
         Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
                 .withTimeout(Duration.ofSeconds(300))
                 .pollingEvery(Duration.ofMillis(500))
@@ -20,7 +21,7 @@ public interface Waits {
         wait.until(ExpectedConditions.invisibilityOf(element));
     }
 
-    default void waitUntilVisible (IOSDriver driver, WebElement element){
+    default void waitUntilVisible (AndroidDriver driver, WebElement element){
         Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
                 .withTimeout(Duration.ofSeconds(30))
                 .pollingEvery(Duration.ofMillis(500))
@@ -28,7 +29,7 @@ public interface Waits {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
-    default void waitUntilClickable (IOSDriver driver, WebElement element){
+    default void waitUntilClickable (AndroidDriver driver, WebElement element){
         Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
                 .withTimeout(Duration.ofSeconds(30))
                 .pollingEvery(Duration.ofMillis(500))
@@ -36,7 +37,7 @@ public interface Waits {
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
-    default void waitUntilAttributeValueToBe (IOSDriver driver, WebElement element, String value){
+    default void waitUntilAttributeValueToBe (AndroidDriver driver, WebElement element, String value){
         Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
                 .withTimeout(Duration.ofSeconds(60))
                 .pollingEvery(Duration.ofMillis(500))

@@ -18,11 +18,10 @@ public class BaseTest extends ObjectManager {
         cleanUpDriver();
     }
 
-    @BeforeMethod
+   @BeforeMethod
     public void popUpTest (){
         System.out.println("LOADING GOSPEL STREAM");
-        getHomePage().notificationsHandler("Allow");
-        getHomePage().newLiveSectionHandler("Close");
+        getHomePage().popUpHandler("New Listen Section", "Close");
         getHomePage().waitForHomeScreenToBeFullyLoaded();
     }
 
@@ -32,5 +31,6 @@ public class BaseTest extends ObjectManager {
         getDriver().removeApp("org.lds.stream.alpha");
         getDriver().installApp(DriverFactoryCapabilities.appPath);
         getDriver().activateApp("org.lds.stream.alpha");
+        //grantPermission(getDriver(), "android.permission.ACCESS_FINE_LOCATION");
     }
 }

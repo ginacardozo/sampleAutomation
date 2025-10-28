@@ -13,18 +13,18 @@
         <parameter name="port" value="4723"/>
         <parameter name="udid" value="emulator-5554"/>
         <classes>
-            <class name="sampleTests.HomeTests">
+            <!--class name="sampleTests.HomeTests">
                 <methods>
                     <include name="radioPlayer"/>
-                    <!--include name="videoPlayer"/-->
+                    <include name="videoPlayer"/>
                 </methods>
-            </class>
-            <!--class name="sampleTests.SampleTests">
+            </class-->
+            <class name="sampleTests.SampleTests">
                 <methods>
                     <include name="sampleTest2"/>
                     <include name="sampleTest3"/>
                 </methods>
-            </class-->
+            </class>
         </classes>
     </test>
 
