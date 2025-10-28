@@ -7,7 +7,7 @@ public class DriverFactoryCapabilities {
     public static String url = "http://"+ipAddress+":";
 
     /*Non Editable Capabilities*/
-    public static String appName = "Gospel Stream";
+    public static String appName = "GospelLibrary";
     public static String platformName = "iOS";
     public static String automationName = "XCUITest";
     public static String enableMultiWindows = "enableMultiWindows";

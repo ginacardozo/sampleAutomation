@@ -7,19 +7,16 @@ import org.openqa.selenium.WebElement;
 
 public class Home extends CommonActions {
     /*Home Screen Elements*/
-    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == \"Loading…\"`]")
-    protected WebElement loadingIcon;
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == \"Home\"`]")
+    protected WebElement homeTabButton;
 
     /*Constructor*/
     public Home (IOSDriver driver) {
         super (driver); /*usa el driver de commonactions*/
-
     }
 
     /*Home Screen Functions*/
-
     public void waitForHomeScreenToBeFullyLoaded (){
-        waitUntilNotVisible(driver, loadingIcon);
-        
+        waitUntilVisible(driver, homeTabButton);
     }
 }
