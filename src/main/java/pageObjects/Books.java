@@ -41,4 +41,8 @@ public class Books extends CommonActions {
         findElementAndClick(chapterOneOption);
         waitUntilVisible(driver, chapterOneTitle);
     }
+
+    public void validateWebviewProperty(String contextName) {
+        switchContext(contextName);
+    }
 }

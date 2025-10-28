@@ -27,6 +27,7 @@ public class SampleTests {
         books.selectBook("Old Testament"); //revisar con chris por que tu quieres mandar un texto y que
         //busque por webelement
         books.selectBookChapter();
+        books.validateWebviewProperty("Genesis 1");
     }
 
     @AfterClass
