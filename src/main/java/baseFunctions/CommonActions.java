@@ -2,15 +2,15 @@ package baseFunctions;
 
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
 import java.time.Duration;
 import java.util.NoSuchElementException;
 import java.util.Set;
@@ -82,5 +82,37 @@ public class CommonActions {
                 }
             }
         }
+    }
+
+    public String codeColor () {
+        String verseXpath = "//*[@id = \"p1\"]";
+        WebElement verseElement = driver.findElement(By.xpath(verseXpath));
+        System.out.println("\tVerse font color: " + verseElement.getCssValue("color"));
+        return verseElement.getCssValue("color");
+    }
+
+    public void takeScreenshot(String fileName){
+        String deviceName = driver.getCapabilities().getCapability("deviceName").toString();
+        File screenshot = driver.getScreenshotAs(OutputType.FILE);
+        String filePath = System.getProperty("user.dir") + "/target/screenshots/" + deviceName + "/";
+        File destinationFile = new File(filePath);
+
+        if (!destinationFile.exists() && !destinationFile.mkdirs()) {
+            throw new RuntimeException("Failed to create directory: " + destinationFile.getAbsolutePath());
+        }
+
+        try {
+            FileUtils.copyFile(screenshot, new File(filePath + fileName + ".png"));
+            System.out.println("Screenshot saved to: " + fileName + ".png");
+        } catch (Exception e) {
+            logger.info("Failed to save screenshot: " + e.getMessage());
+        }
+    }
+
+    public void phoneDimensions () {
+        Dimension dimension = driver.manage().window().getSize();
+        int width = dimension.getWidth();
+        int height = dimension.getHeight();
+        System.out.println("Phone Width: " + width + " Phone Height: " + height);
     }
 }

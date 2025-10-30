@@ -19,6 +19,8 @@ public class Books extends CommonActions {
     public WebElement chapterOneOption;
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == \"CHAPTER 1\"`]")
     public WebElement chapterOneTitle;
+    @iOSXCUITFindBy (iOSClassChain = "**/XCUIElementTypeStaticText[`name == \"More\"`]")
+    public WebElement moreOptionsButton;
 
     /*Constructor*/
     public Books (IOSDriver driver) {
@@ -44,5 +46,9 @@ public class Books extends CommonActions {
 
     public void validateWebviewProperty(String contextName) {
         switchContext(contextName);
+    }
+
+    public void selectMoreOptions(){
+        findElementAndClick(moreOptionsButton);
     }
 }

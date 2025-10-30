@@ -15,7 +15,7 @@
     <java.version>21</java.version>
 
     <!-- Defining the version of Allure -->
-    <allure.version>2.24.0</allure.version>
+    <allure.version>2.30.0</allure.version>
   </properties>
 
   <dependencyManagement>
@@ -31,6 +31,12 @@
   </dependencyManagement>
 
   <dependencies>
+    <!-- Apache Commons IO Dependency -->
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.20.0</version>
+    </dependency>
 
     <!-- Selenium Dependencies -->
     <dependency>
@@ -89,6 +95,12 @@
       <artifactId>allure-testng</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjweaver</artifactId>
+      <version>1.9.21</version>
+      <scope>runtime</scope>
+    </dependency>
 
   </dependencies>
 
@@ -96,6 +108,11 @@
     <pluginManagement>
       <plugins>
 
+        <plugin>
+          <groupId>io.qameta.allure</groupId>
+          <artifactId>allure-maven</artifactId>
+          <version>2.30.0</version>
+        </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
@@ -124,6 +141,10 @@
             <suiteXmlFiles>
               <suiteXmlFile>testng.xml</suiteXmlFile>
             </suiteXmlFiles>
+            <argLine>-javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/1.9.21/aspectjweaver-1.9.21.jar</argLine>
+            <systemPropertyVariables>
+              <allure.results.directory>target/allure-results</allure.results.directory>
+            </systemPropertyVariables>
           </configuration>
         </plugin>
 
