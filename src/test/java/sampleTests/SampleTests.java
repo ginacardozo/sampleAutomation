@@ -10,6 +10,7 @@ public class SampleTests extends BaseTest {
         loadHomeScreen();
         loadBooksScreen();
         loadBookChapter();
+        selectDisplayOptions();
         webViewSteps();
     }
 
@@ -32,10 +33,16 @@ public class SampleTests extends BaseTest {
         System.out.println("Book chapter loaded successfully");
     }
 
+    @Step ("Display options selected")
+    public void selectDisplayOptions() {
+        getBooks().selectMoreOptions("Display Options");
+        getBooks().assertDisplayOptions();
+        System.out.println("Display options selected successfully");
+    }
+
     @Step("WebView steps related")
     public void webViewSteps() {
         getBooks().validateWebviewProperty("Genesis 1");
-        getBooks().selectMoreOptions();
         getBooks().codeColor();
         getBooks().validateWebviewProperty("NATIVE");
         getHome().phoneDimensions();

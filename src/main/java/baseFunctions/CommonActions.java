@@ -14,6 +14,7 @@ import java.io.File;
 import java.time.Duration;
 import java.util.NoSuchElementException;
 import java.util.Set;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.logging.Logger;
 
 import static org.testng.Assert.fail;
@@ -114,5 +115,9 @@ public class CommonActions {
         int width = dimension.getWidth();
         int height = dimension.getHeight();
         System.out.println("Phone Width: " + width + " Phone Height: " + height);
+    }
+
+    public CopyOnWriteArrayList <WebElement> getElementsByXpath (String xpath){
+        return new CopyOnWriteArrayList<>(driver.findElements(By.xpath(xpath)));
     }
 }
