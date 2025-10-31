@@ -30,7 +30,8 @@ public class BaseTest extends ObjectManager {
         getDriver().terminateApp("org.lds.stream.alpha");
         getDriver().removeApp("org.lds.stream.alpha");
         getDriver().installApp(DriverFactoryCapabilities.appPath);
+        grantRuntimePermissions(getDriver(), "org.lds.stream.alpha",
+                new String[]{"android.permission.POST_NOTIFICATIONS"});
         getDriver().activateApp("org.lds.stream.alpha");
-        //grantPermission(getDriver(), "android.permission.ACCESS_FINE_LOCATION");
     }
 }

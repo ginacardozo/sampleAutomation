@@ -11,6 +11,7 @@ public class AppiumServiceManager {
 
     public static void startAppiumService(String appiumJs, String ipAddress, int port) {
         service.set(new AppiumServiceBuilder()
+                        .withArgument(()->"--allow-insecure", "adb_shell")
                 .withAppiumJS(new File(appiumJs))
                 .withIPAddress(ipAddress)
                 .usingPort(port)

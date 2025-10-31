@@ -3,7 +3,7 @@ package driverManager;
 import com.google.common.collect.ImmutableMap;
 import io.appium.java_client.Setting;
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.ios.options.XCUITestOptions;
+import io.appium.java_client.android.options.UiAutomator2Options;
 
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -13,6 +13,8 @@ import java.net.URL;
 import java.time.Duration;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import static driverManager.DriverFactoryCapabilities.*;
@@ -32,7 +34,7 @@ public class DriverFactory {
         AppiumServiceManager.startAppiumService(appiumJS, ipAddress, currentPort);
         try{
             logger.info("Application Directory: "+ System.getProperty("user.dir"));
-            XCUITestOptions mobileCapabilities = new XCUITestOptions();
+            UiAutomator2Options mobileCapabilities = new UiAutomator2Options();
 
             mobileCapabilities.setPlatformName(platformName);
             mobileCapabilities.setPlatformVersion(platformVersion);
@@ -40,12 +42,12 @@ public class DriverFactory {
             mobileCapabilities.setDeviceName(deviceName);
             mobileCapabilities.setApp(appPath);
             mobileCapabilities.setCapability(enableMultiWindows, true);
-            mobileCapabilities.setWdaLaunchTimeout(wdaTimeLaunchTimeOut);
+            mobileCapabilities.setAvdLaunchTimeout(wdaTimeLaunchTimeOut);
             mobileCapabilities.setUdid(udid);
             mobileCapabilities.setCapability("isHeadless", isHeadless);
-            mobileCapabilities.setCapability("autoGrantPermissions", autoGrantPermissions);
+            mobileCapabilities.setAutoGrantPermissions(autoGrantPermissions);
 
-            mobileCapabilities.setWdaLocalPort(8100+(currentPort-4723));
+            mobileCapabilities.setAdbPort(8100+(currentPort-4723));
             mobileCapabilities.setCapability("wda.connectionTimeout", 60000);
             mobileCapabilities.setCapability("wda.startupRetries", 2);
             mobileCapabilities.setCapability("wda.startupRetryInterval", 20000);
@@ -79,10 +81,12 @@ public class DriverFactory {
         }
     }
 
-    public void grantPermission(AndroidDriver driver, String permission) {
-        driver.executeScript("mobile: shell", ImmutableMap.of(
-                "command", "pm grant",
-                "args", Arrays.asList("com.example.app", permission)
-        ));
+    public static void grantRuntimePermissions(AndroidDriver driver, String pkg, String[] perms) {
+        for (String perm : perms) {
+            Map<String, Object> args = new HashMap<>();
+            args.put("command", "pm");
+            args.put("args", new String[]{"grant", pkg, perm});
+            driver.executeScript("mobile: shell", args);
+        }
     }
 }
