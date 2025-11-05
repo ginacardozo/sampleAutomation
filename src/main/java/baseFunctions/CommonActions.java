@@ -156,21 +156,6 @@ public class CommonActions implements Waits, Assertions {
         int xi = section.getLocation().getX() + (int)(section.getSize().getWidth()*(0.9));
         int xf = section.getLocation().getX() + (int)(section.getSize().getWidth()*(0.1));
         dragAndDrop(xi, y, xf, y, 3, 0);
-
-        /*//Center the found element on the screen on X axis
-        int y = elementFound.getLocation().getY() + (elementFound.getSize().getHeight() / 2);
-        int x = elementFound.getLocation().getX() + (elementFound.getSize().getWidth());
-
-        int screenWidth = driver.manage().window().getSize().width;
-        int screenCenterX = screenWidth / 2;
-        int swipeDistance = x - screenCenterX;
-        int initialSwipeX = (int)(screenWidth * 0.9);
-        int finalSwipeX = (int)(screenWidth * 0.1);
-
-        if (swipeDistance != 0) {
-            dragAndDrop(initialSwipeX, y, finalSwipeX, y,2, 0);
-            System.out.println("Element " + elementName + " swiped.");
-        }*/
     }
 
     /*Double Tap on screen Method*/
