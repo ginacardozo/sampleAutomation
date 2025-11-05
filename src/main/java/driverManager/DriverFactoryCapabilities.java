@@ -13,9 +13,6 @@ public class DriverFactoryCapabilities {
     public static String enableMultiWindows = "enableMultiWindows";
     public static String appPath = System.getProperty("user.dir")+"/app/"+appName+".app";
 
-
     /*Editable Capabilities*/
     public static boolean isHeadless = false;
-
-
 }

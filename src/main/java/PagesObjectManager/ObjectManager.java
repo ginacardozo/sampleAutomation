@@ -6,6 +6,7 @@ import pageObjects.*;
 public class ObjectManager extends DriverFactory {
     private Books books;
     private Home home;
+    private Search search;
 
 
     public Books getBooks() {
@@ -19,5 +20,11 @@ public class ObjectManager extends DriverFactory {
            home = new Home (getDriver());
        }
        return home;
+    }
+    public Search getSearch() {
+        if (search == null) {
+            search = new Search (getDriver());
+        }
+        return search;
     }
 }

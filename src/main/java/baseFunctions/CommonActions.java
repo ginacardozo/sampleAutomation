@@ -23,17 +23,13 @@ public class CommonActions {
     protected IOSDriver driver;
     private static final Logger logger= Logger.getLogger(CommonActions.class.getName());
 
-    /*Common Actions Screen Elements*/
-
     /*Constructor*/
     public CommonActions (IOSDriver driver){
         this.driver=driver;
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
-
     }
 
     /*Common Actions Screen Functions*/
-
     public void waitUntilNotVisible (IOSDriver driver, WebElement element){
         Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
                 .withTimeout(Duration.ofSeconds(300))

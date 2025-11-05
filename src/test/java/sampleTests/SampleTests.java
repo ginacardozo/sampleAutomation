@@ -48,5 +48,5 @@ public class SampleTests extends BaseTest {
         getHome().phoneDimensions();
         getBooks().takeScreenshot("SampleTest_Screenshot");
         System.out.println("WebView steps executed successfully");
-    }
+    } 
 }

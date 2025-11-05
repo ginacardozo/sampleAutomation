@@ -12,7 +12,7 @@ public class Home extends CommonActions {
 
     /*Constructor*/
     public Home (IOSDriver driver) {
-        super (driver); /*usa el driver de commonactions*/
+        super (driver);
     }
 
     /*Home Screen Functions*/
